@@ -16,4 +16,8 @@
     <ProjectReference Include="..\VaccinationCard.Domain\VaccinationCard.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="People\Queries\" />
+  </ItemGroup>
+
 </Project>

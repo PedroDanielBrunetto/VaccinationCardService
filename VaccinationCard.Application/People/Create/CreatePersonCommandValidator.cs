@@ -14,6 +14,17 @@ namespace VaccinationCard.Application.People.Create
                 .NotEmpty()
                 .Length(11)
                 .Matches(@"^\d+$");
+
+            RuleFor(x => x.Age)
+                .NotNull();
+
+            RuleFor(x => x.Gender)
+                .NotNull()
+                .IsInEnum();
+
+            RuleFor(x => x.Email)
+                .NotNull()
+                .EmailAddress();
         }
     }
 }
