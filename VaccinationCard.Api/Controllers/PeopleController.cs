@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using VaccinationCard.Application.People.Create;
 using VaccinationCard.Application.People.Delete;
+using VaccinationCard.Application.People.Queries.GetAllPersons;
 using VaccinationCard.Application.Vaccinations.Queries.GetVaccinationCard;
 
 namespace VaccinationCard.Api.Controllers
@@ -23,6 +24,14 @@ namespace VaccinationCard.Api.Controllers
             var id = await _mediator.Send(command, cancellationToken);
 
             return CreatedAtAction(nameof(Create), new { id }, id);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get(CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(new GetAllPersonsQuery(), cancellationToken);
+
+            return Ok(result);
         }
 
         [HttpGet("{id}/vaccination-card")]
