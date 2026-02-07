@@ -24,7 +24,7 @@ namespace VaccinationCard.Application.People.Queries
                     Document = p.Document,
                     Gender = p.Gender.ToString(),
                     Email = p.Email,
-                    Age = p.Age
+                    Birth = p.Birth
                 })
                 .ToListAsync(cancellationToken);
 

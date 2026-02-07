@@ -6,7 +6,7 @@
         public string Name { get; set; } = null!;
         public string Document { get; set; } = null!;
         public string Gender { get; set; } = null!;
-        public int Age { get; set; }
+        public DateTime Birth { get; set; }
         public string Email { get; set; } = null!;
     }
 }

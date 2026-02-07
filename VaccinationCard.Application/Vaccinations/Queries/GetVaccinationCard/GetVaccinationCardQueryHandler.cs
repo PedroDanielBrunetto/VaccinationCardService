@@ -43,6 +43,9 @@ namespace VaccinationCard.Application.Vaccinations.Queries
                 PersonId = person.Id,
                 PersonName = person.Name,
                 Document = person.Document,
+                Gender = person.Gender.ToString(),
+                Birth = person.Birth,
+                Email = person.Email,
                 Vaccinations = vaccinations
             };
         }

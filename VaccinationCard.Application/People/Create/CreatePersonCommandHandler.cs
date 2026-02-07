@@ -22,7 +22,7 @@ namespace VaccinationCard.Application.People.Create
             if (documentExists)
                 throw new ConflictException("O documento informado já possui cadastro.");
 
-            var person = new Person(request.Name, request.Document, request.Gender, request.Age, request.Email);
+            var person = new Person(request.Name, request.Document, request.Gender, request.Birth, request.Email);
 
             _context.Persons.Add(person);
             await _context.SaveChangesAsync(cancellationToken);
