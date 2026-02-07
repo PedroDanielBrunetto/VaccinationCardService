@@ -10,5 +10,14 @@ namespace VaccinationCard.Application.People.Create
         public Gender Gender { get; init; }
         public DateTime Birth { get; init; }
         public string Email { get; init; } = null!;
+
+        public CreatePersonCommand(string name, string document, Gender gender, DateTime birth, string email)
+        {
+            Name = name;
+            Document = document;
+            Gender = gender;
+            Birth = birth;
+            Email = email;
+        }
     }
 }
