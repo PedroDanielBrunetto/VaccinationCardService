@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace VaccinationCard.Application.Vaccinations.Queries.GetVaccinationCard
+namespace VaccinationCard.Application.Vaccinations.Queries
 {
     public class GetVaccinationCardQuery : IRequest<VaccinationCardDto>
     {

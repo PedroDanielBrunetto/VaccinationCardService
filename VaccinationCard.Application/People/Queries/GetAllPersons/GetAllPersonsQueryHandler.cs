@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using VaccinationCard.Application.Abstractions.Persistence;
 
-namespace VaccinationCard.Application.People.Queries.GetAllPersons
+namespace VaccinationCard.Application.People.Queries
 {
     public class GetAllPersonsQueryHandler : IRequestHandler<GetAllPersonsQuery, List<PersonDTO>>
     {

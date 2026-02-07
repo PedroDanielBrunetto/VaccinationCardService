@@ -1,14 +1,12 @@
-﻿using VaccinationCard.Domain.Enums;
-
-namespace VaccinationCard.Application.People.Queries.GetAllPersons
-{
+﻿namespace VaccinationCard.Application.People.Queries
+{ 
     public class PersonDTO
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Document { get; set; }
-        public string Gender { get; set; }
+        public string Name { get; set; } = null!;
+        public string Document { get; set; } = null!;
+        public string Gender { get; set; } = null!;
         public int Age { get; set; }
-        public string Email { get; set; }
+        public string Email { get; set; } = null!;
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using VaccinationCard.Application.Abstractions.Persistence;
 using VaccinationCard.Application.Commom.Exceptions;
 
-namespace VaccinationCard.Application.Vaccinations.Queries.GetVaccinationCard
+namespace VaccinationCard.Application.Vaccinations.Queries
 {
     public class GetVaccinationCardQueryHandler : IRequestHandler<GetVaccinationCardQuery, VaccinationCardDto>
     {

@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using VaccinationCard.Application.People.Create;
 using VaccinationCard.Application.People.Delete;
-using VaccinationCard.Application.People.Queries.GetAllPersons;
-using VaccinationCard.Application.Vaccinations.Queries.GetVaccinationCard;
+using VaccinationCard.Application.People.Queries;
+using VaccinationCard.Application.Vaccinations.Queries;
 
 namespace VaccinationCard.Api.Controllers
 {

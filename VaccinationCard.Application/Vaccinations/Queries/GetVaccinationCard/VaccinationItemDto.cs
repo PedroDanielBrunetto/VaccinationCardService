@@ -1,4 +1,4 @@
-﻿namespace VaccinationCard.Application.Vaccinations.Queries.GetVaccinationCard
+﻿namespace VaccinationCard.Application.Vaccinations.Queries
 {
     public class VaccinationItemDto
     {
