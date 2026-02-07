@@ -3,16 +3,19 @@ using Microsoft.EntityFrameworkCore;
 using VaccinationCard.Application.Abstractions.Persistence;
 using VaccinationCard.Application.Commom.Exceptions;
 using VaccinationCard.Domain.Entities;
+using VaccinationCard.Domain.Events;
 
 namespace VaccinationCard.Application.Vaccinations.Create
 {
     public class CreateVaccinationCommandHandler : IRequestHandler<CreateVaccinationCommand, Guid>
     {
         private readonly IVaccinationDbContext _context;
+        private readonly IMediator _mediator;
 
-        public CreateVaccinationCommandHandler(IVaccinationDbContext context)
+        public CreateVaccinationCommandHandler(IVaccinationDbContext context, IMediator mediator)
         {
             _context = context;
+            _mediator = mediator;
         }
 
         public async Task<Guid> Handle(CreateVaccinationCommand request, CancellationToken cancellationToken)
@@ -52,6 +55,14 @@ namespace VaccinationCard.Application.Vaccinations.Create
 
             _context.Vaccinations.Add(vaccination);
             await _context.SaveChangesAsync(cancellationToken);
+
+            await _mediator.Publish(new VaccinationCreatedEvent(
+                vaccination.Id,
+                vaccination.PersonId,
+                vaccination.VaccineId,
+                vaccination.Dose,
+                DateTime.UtcNow
+                ), cancellationToken);
 
             return vaccination.Id;
         }

@@ -1,0 +1,7 @@
+﻿namespace VaccinationCard.Application.Abstractions.Messaging
+{
+    public interface IMessageBus
+    {
+        Task PublishAsync<T>(T message, CancellationToken cancellationToken = default);
+    }
+}

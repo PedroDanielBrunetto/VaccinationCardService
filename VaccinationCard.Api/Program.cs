@@ -2,8 +2,6 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using VaccinationCard.Api.Middlewares;
-using VaccinationCard.Application.Abstractions.Persistence;
 using VaccinationCard.Application.People.Create;
 using VaccinationCard.Application.Vaccinations.Create;
 using VaccinationCard.Application.Vaccines.Create;
@@ -13,6 +11,10 @@ using VaccinationCard.Application.Vaccines.Queries;
 using VaccinationCard.Application.People.Delete;
 using VaccinationCard.Application.Vaccinations.Delete;
 using VaccinationCard.Application.Vaccines.Delete;
+using VaccinationCard.Api.Middlewares;
+using VaccinationCard.Application.Abstractions.Persistence;
+using VaccinationCard.Application.Abstractions.Messaging;
+using VaccinationCard.Infrastructure.Messaging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,6 +70,8 @@ builder.Services.AddFluentValidationAutoValidation();
 // IoC
 builder.Services.AddScoped<IVaccinationDbContext>(
     provider => provider.GetRequiredService<VaccinationDbContext>());
+
+builder.Services.AddScoped<IMessageBus, FakeMessageBus>();
 
 var app = builder.Build();
 

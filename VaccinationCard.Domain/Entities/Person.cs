@@ -13,8 +13,6 @@ namespace VaccinationCard.Domain.Entities
 
         public ICollection<Vaccination> Vaccinations { get; private set; } = new List<Vaccination>();
 
-        protected Person() { }
-
         public Person(string name, string document, Gender gender, DateTime birth, string email)
         {
             Name = name;
