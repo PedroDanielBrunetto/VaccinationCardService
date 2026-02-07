@@ -7,6 +7,11 @@ using VaccinationCard.Application.Abstractions.Persistence;
 using VaccinationCard.Application.People.Create;
 using VaccinationCard.Application.Vaccinations.Create;
 using VaccinationCard.Application.Vaccines.Create;
+using VaccinationCard.Application.People.Queries;
+using VaccinationCard.Application.Vaccinations.Queries;
+using VaccinationCard.Application.Vaccines.Queries;
+using VaccinationCard.Application.People.Delete;
+using VaccinationCard.Application.Vaccines.Delete;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +43,21 @@ builder.Services.AddValidatorsFromAssembly(typeof(CreateVaccineCommandValidator)
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateVaccinationCommand).Assembly));
 builder.Services.AddValidatorsFromAssembly(typeof(CreateVaccinationCommandValidator).Assembly);
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(DeletePersonCommand).Assembly));
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(DeleteVaccineCommand).Assembly));
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(GetAllPersonsQuery).Assembly));
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(GetVaccinationCardQuery).Assembly));
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(GetAllVaccinesQuery).Assembly));
 
 builder.Services.AddFluentValidationAutoValidation();
 

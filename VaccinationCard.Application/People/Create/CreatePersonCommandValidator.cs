@@ -15,7 +15,7 @@ namespace VaccinationCard.Application.People.Create
                 .Length(11)
                 .Matches(@"^\d+$");
 
-            RuleFor(x => x.Age)
+            RuleFor(x => x.Birth)
                 .NotNull();
 
             RuleFor(x => x.Gender)
