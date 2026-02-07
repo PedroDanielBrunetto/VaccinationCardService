@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using VaccinationCard.Application.Vaccines.Create;
+using VaccinationCard.Application.Vaccines.Queries;
 
 namespace VaccinationCard.Api.Controllers
 {
@@ -21,6 +22,14 @@ namespace VaccinationCard.Api.Controllers
             var id = await _mediator.Send(command, cancellationToken);
 
             return CreatedAtAction(nameof(Create), new { id }, id);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get(GetAllVaccinesQuery command, CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(command, cancellationToken);
+
+            return Ok(result);
         }
     }
 }
