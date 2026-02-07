@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using VaccinationCard.Application.Vaccinations.Create;
+using VaccinationCard.Application.Vaccinations.Delete;
 
 namespace VaccinationCard.Api.Controllers
 {
@@ -21,6 +22,13 @@ namespace VaccinationCard.Api.Controllers
             var id = await _mediator.Send(command, cancellationToken);
 
             return CreatedAtAction(nameof(Create), new { id }, id);
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _mediator.Send(new DeleteVaccinationCommand(id));
+            return NoContent();
         }
     }
 }

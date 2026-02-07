@@ -11,6 +11,7 @@ using VaccinationCard.Application.People.Queries;
 using VaccinationCard.Application.Vaccinations.Queries;
 using VaccinationCard.Application.Vaccines.Queries;
 using VaccinationCard.Application.People.Delete;
+using VaccinationCard.Application.Vaccinations.Delete;
 using VaccinationCard.Application.Vaccines.Delete;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,15 +38,18 @@ builder.Services.AddMediatR(cfg =>
 builder.Services.AddValidatorsFromAssembly(typeof(CreatePersonCommandValidator).Assembly);
 
 builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssembly(typeof(CreateVaccineCommand).Assembly));
-builder.Services.AddValidatorsFromAssembly(typeof(CreateVaccineCommandValidator).Assembly);
-
-builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreateVaccinationCommand).Assembly));
 builder.Services.AddValidatorsFromAssembly(typeof(CreateVaccinationCommandValidator).Assembly);
 
 builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(CreateVaccineCommand).Assembly));
+builder.Services.AddValidatorsFromAssembly(typeof(CreateVaccineCommandValidator).Assembly);
+
+builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(DeletePersonCommand).Assembly));
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(DeleteVaccinationCommand).Assembly));
 
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(DeleteVaccineCommand).Assembly));
