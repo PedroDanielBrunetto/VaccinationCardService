@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using VaccinationCard.Application.Abstractions.Persistence;
 using VaccinationCard.Domain.Entities;
 
-public class VaccinationDbContext : DbContext
+public class VaccinationDbContext : DbContext, IVaccinationDbContext
 {
     public VaccinationDbContext(DbContextOptions<VaccinationDbContext> options)
         : base(options) { }

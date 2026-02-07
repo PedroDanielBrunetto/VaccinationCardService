@@ -1,5 +1,9 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using VaccinationCard.Application.Abstractions.Persistence;
+using VaccinationCard.Application.People.Create;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Database setup
 var connection = new SqliteConnection("DataSource=:memory:");
 connection.Open();
 
@@ -17,6 +22,18 @@ builder.Services.AddDbContext<VaccinationDbContext>(options =>
 {
     options.UseSqlite(connection);
 });
+
+// Application services
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(CreatePersonCommand).Assembly));
+
+builder.Services.AddValidatorsFromAssembly(typeof(CreatePersonCommandValidator).Assembly);
+builder.Services.AddFluentValidationAutoValidation();
+
+// IoC
+builder.Services.AddScoped<IVaccinationDbContext>(
+    provider => provider.GetRequiredService<VaccinationDbContext>());
+
 
 var app = builder.Build();
 
