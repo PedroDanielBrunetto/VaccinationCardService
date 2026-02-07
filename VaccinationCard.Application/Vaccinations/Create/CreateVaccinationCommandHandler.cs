@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using VaccinationCard.Application.Abstractions.Persistence;
+using VaccinationCard.Application.Commom.Exceptions;
 using VaccinationCard.Domain.Entities;
 
 namespace VaccinationCard.Application.Vaccinations.Create
@@ -19,12 +20,12 @@ namespace VaccinationCard.Application.Vaccinations.Create
             var personExists = await _context.Persons.AnyAsync(p => p.Id == request.PersonId, cancellationToken);
 
             if (!personExists)
-                throw new InvalidOperationException("Pessoa não encontrada.");
+                throw new NotFoundException("Pessoa não encontrada.");
 
             var vaccineExists = await _context.Vaccines.AnyAsync(v => v.Id == request.VaccineId, cancellationToken);
 
             if (!vaccineExists)
-                throw new InvalidOperationException("Vacina não encontrada.");
+                throw new NotFoundException("Vacina não encontrada.");
 
             var previousDoses = await _context.Vaccinations
                 .Where(v =>
@@ -34,14 +35,14 @@ namespace VaccinationCard.Application.Vaccinations.Create
                 .ToListAsync(cancellationToken);
 
             if (previousDoses.Contains(request.Dose))
-                throw new InvalidOperationException("Essa dose já foi aplicada.");
+                throw new ConflictException("Essa dose já foi aplicada.");
 
             var expectedNextDose = previousDoses.Count == 0
                 ? 1
                 : previousDoses.Max() + 1;
 
             if (request.Dose != expectedNextDose)
-                throw new InvalidOperationException(
+                throw new ConflictException(
                     $"Sequência de dose inválida. A dose correta é {expectedNextDose}.");
 
             var vaccination = new Vaccination(

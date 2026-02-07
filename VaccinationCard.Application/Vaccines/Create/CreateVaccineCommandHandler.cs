@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using VaccinationCard.Application.Abstractions.Persistence;
+using VaccinationCard.Application.Commom.Exceptions;
 using VaccinationCard.Domain.Entities;
 
 namespace VaccinationCard.Application.Vaccines.Create
@@ -19,7 +20,7 @@ namespace VaccinationCard.Application.Vaccines.Create
             var exists = await _context.Vaccines.AnyAsync(v => v.Name == request.Name, cancellationToken);
 
             if (exists)
-                throw new InvalidOperationException("A vacina informada já possui cadastro.");
+                throw new ConflictException("A vacina informada já possui cadastro.");
 
             var vaccine = new Vaccine(request.Name);
 

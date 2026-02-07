@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using VaccinationCard.Application.Abstractions.Persistence;
+using VaccinationCard.Application.Commom.Exceptions;
 
 namespace VaccinationCard.Application.Vaccinations.Queries.GetVaccinationCard
 {
@@ -22,7 +23,7 @@ namespace VaccinationCard.Application.Vaccinations.Queries.GetVaccinationCard
                     cancellationToken);
 
             if (person is null)
-                throw new InvalidOperationException("Pessoa não encontrada.");
+                throw new NotFoundException("Pessoa não encontrada.");
 
             var vaccinations = await _context.Vaccinations
                 .AsNoTracking()

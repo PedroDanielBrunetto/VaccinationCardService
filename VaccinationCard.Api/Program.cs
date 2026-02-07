@@ -2,6 +2,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using VaccinationCard.Api.Middlewares;
 using VaccinationCard.Application.Abstractions.Persistence;
 using VaccinationCard.Application.People.Create;
 using VaccinationCard.Application.Vaccinations.Create;
@@ -56,6 +57,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapControllers();
 

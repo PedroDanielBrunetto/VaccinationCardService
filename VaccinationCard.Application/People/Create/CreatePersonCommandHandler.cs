@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using VaccinationCard.Application.Commom.Exceptions;
 using VaccinationCard.Application.Abstractions.Persistence;
 using VaccinationCard.Domain.Entities;
 
@@ -19,7 +20,7 @@ namespace VaccinationCard.Application.People.Create
             var documentExists = await _context.Persons.AnyAsync(p => p.Document == request.Document, cancellationToken);
 
             if (documentExists)
-                throw new InvalidOperationException("O documento informado já possui cadastro.");
+                throw new ConflictException("O documento informado já possui cadastro.");
 
             var person = new Person(request.Name, request.Document);
 
