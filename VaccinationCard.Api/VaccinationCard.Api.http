@@ -1,6 +1,6 @@
 @VaccinationCard.Api_HostAddress = http://localhost:5036
 
-GET {{VaccinationCard.Api_HostAddress}}/weatherforecast/
+GET {{VaccinationCard.Api_HostAddress}}/
 Accept: application/json
 
 ###
