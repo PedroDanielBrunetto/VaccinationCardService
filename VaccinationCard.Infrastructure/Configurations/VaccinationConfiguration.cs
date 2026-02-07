@@ -16,6 +16,11 @@ namespace VaccinationCard.Infrastructure.Configurations
             builder.Property(v => v.AppliedAt)
                 .IsRequired();
 
+            builder.HasOne(v => v.Person)
+                .WithMany(p => p.Vaccinations)
+                .HasForeignKey(v => v.PersonId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.HasOne(v => v.Vaccine)
                 .WithMany()
                 .HasForeignKey(v => v.VaccineId);
