@@ -1,11 +1,11 @@
 ﻿namespace VaccinationCard.Application.Vaccinations.Queries
 {
-    public class VaccinationCardDto
+    public class VaccinationCardDTO
     {
         public Guid PersonId { get; init; }
         public string PersonName { get; init; } = null!;
         public string Document { get; init; } = null!;
-        public IReadOnlyCollection<VaccinationItemDto> Vaccinations { get; init; }
-            = Array.Empty<VaccinationItemDto>();
+        public IReadOnlyCollection<VaccinationItemDTO> Vaccinations { get; init; }
+            = Array.Empty<VaccinationItemDTO>();
     }
 }

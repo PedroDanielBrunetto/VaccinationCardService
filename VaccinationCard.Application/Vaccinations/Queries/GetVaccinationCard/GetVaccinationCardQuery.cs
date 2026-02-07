@@ -2,7 +2,7 @@
 
 namespace VaccinationCard.Application.Vaccinations.Queries
 {
-    public class GetVaccinationCardQuery : IRequest<VaccinationCardDto>
+    public class GetVaccinationCardQuery : IRequest<VaccinationCardDTO>
     {
         public Guid PersonId { get; }
 

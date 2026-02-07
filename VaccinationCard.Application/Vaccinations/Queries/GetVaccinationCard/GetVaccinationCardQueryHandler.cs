@@ -5,7 +5,7 @@ using VaccinationCard.Application.Commom.Exceptions;
 
 namespace VaccinationCard.Application.Vaccinations.Queries
 {
-    public class GetVaccinationCardQueryHandler : IRequestHandler<GetVaccinationCardQuery, VaccinationCardDto>
+    public class GetVaccinationCardQueryHandler : IRequestHandler<GetVaccinationCardQuery, VaccinationCardDTO>
     {
         private readonly IVaccinationDbContext _context;
 
@@ -14,7 +14,7 @@ namespace VaccinationCard.Application.Vaccinations.Queries
             _context = context;
         }
 
-        public async Task<VaccinationCardDto> Handle(GetVaccinationCardQuery request, CancellationToken cancellationToken)
+        public async Task<VaccinationCardDTO> Handle(GetVaccinationCardQuery request, CancellationToken cancellationToken)
         {
             var person = await _context.Persons
                 .AsNoTracking()
@@ -30,7 +30,7 @@ namespace VaccinationCard.Application.Vaccinations.Queries
                 .Where(v => v.PersonId == request.PersonId)
                 .Include(v => v.Vaccine)
                 .OrderBy(v => v.AppliedAt)
-                .Select(v => new VaccinationItemDto
+                .Select(v => new VaccinationItemDTO
                 {
                     VaccineName = v.Vaccine.Name,
                     Dose = v.Dose,
@@ -38,7 +38,7 @@ namespace VaccinationCard.Application.Vaccinations.Queries
                 })
                 .ToListAsync(cancellationToken);
 
-            return new VaccinationCardDto
+            return new VaccinationCardDTO
             {
                 PersonId = person.Id,
                 PersonName = person.Name,
