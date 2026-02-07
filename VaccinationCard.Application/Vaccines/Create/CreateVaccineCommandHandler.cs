@@ -16,8 +16,7 @@ namespace VaccinationCard.Application.Vaccines.Create
 
         public async Task<Guid> Handle(CreateVaccineCommand request, CancellationToken cancellationToken)
         {
-            var exists = await _context.Vaccines
-                .AnyAsync(v => v.Name == request.Name, cancellationToken);
+            var exists = await _context.Vaccines.AnyAsync(v => v.Name == request.Name, cancellationToken);
 
             if (exists)
                 throw new InvalidOperationException("A vacina informada já possui cadastro.");

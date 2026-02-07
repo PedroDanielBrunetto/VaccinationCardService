@@ -4,6 +4,8 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using VaccinationCard.Application.Abstractions.Persistence;
 using VaccinationCard.Application.People.Create;
+using VaccinationCard.Application.Vaccinations.Create;
+using VaccinationCard.Application.Vaccines.Create;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,14 +28,21 @@ builder.Services.AddDbContext<VaccinationDbContext>(options =>
 // Application services
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(CreatePersonCommand).Assembly));
-
 builder.Services.AddValidatorsFromAssembly(typeof(CreatePersonCommandValidator).Assembly);
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(CreateVaccineCommand).Assembly));
+builder.Services.AddValidatorsFromAssembly(typeof(CreateVaccineCommandValidator).Assembly);
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(CreateVaccinationCommand).Assembly));
+builder.Services.AddValidatorsFromAssembly(typeof(CreateVaccinationCommandValidator).Assembly);
+
 builder.Services.AddFluentValidationAutoValidation();
 
 // IoC
 builder.Services.AddScoped<IVaccinationDbContext>(
     provider => provider.GetRequiredService<VaccinationDbContext>());
-
 
 var app = builder.Build();
 
